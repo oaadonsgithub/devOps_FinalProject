@@ -4,28 +4,25 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = "4.52.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
+      source = "hashicorp/aws"
+      version = "5.94.1"
     }
   }
-  required_version = ">= 1.1.0"
 
-  cloud {
-    organization = "REPLACE_ME"
-
-    workspaces {
-      name = "gh-actions-demo"
-    }
-  }
+   required_version = ">= 1.0.0"  # Optional version constraint
 }
 
 provider "aws" {
-  region = "us-west-2"
+   region = var.region
 }
+
+
+variable "region" {
+  description = "AWS region to deploy to"
+  type        = string
+  default     = "us-west-1" # optionaladded
+}
+
 
 resource "random_pet" "sg" {}
 
