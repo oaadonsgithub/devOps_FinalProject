@@ -17,7 +17,7 @@ jobs:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Apply"
     runs-on: ubuntu-latest
-    permissions: # granular permissions
+    permissions: # granular permissionsnottt
       # so GitHub can check out this repo using the default github.token
       contents: read
     steps:

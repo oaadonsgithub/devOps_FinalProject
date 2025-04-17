@@ -8,6 +8,8 @@ terraform {
       version = "5.94.1"
     }
   }
+
+   required_version = ">= 1.0.0"  # Optional version constraint
 }
 
 provider "aws" {
