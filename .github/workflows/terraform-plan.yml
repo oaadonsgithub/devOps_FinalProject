@@ -37,6 +37,12 @@ jobs:
           directory: ${{ env.CONFIG_DIRECTORY }}
           speculative: true
 
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
       - name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: plan-run
