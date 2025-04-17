@@ -11,8 +11,16 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-1"
+   region = var.region
 }
+
+
+variable "region" {
+  description = "AWS region to deploy to"
+  type        = string
+  default     = "us-west-1" # optional
+}
+
 
 resource "random_pet" "sg" {}
 
