@@ -1,3 +1,25 @@
+
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.94.1"
+    }
+  }
+
+   required_version = ">= 1.0.0"  # Optional version constraint
+}
+
+
+
+
+
+
+
+
 # Internet VPC
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
@@ -65,26 +87,29 @@ resource "aws_route_table_association" "main-public-1-a" {
 
 # Create multiple EC2 instances
 resource "aws_instance" "terra_ubu" {
-  count = 3 
+
 
   ami                    = "ami-0a07501f369088e6e"
   instance_type          = "t2.micro" 
-  key_name               = aws_key_pair.mykeypair.key_name
-  tags = {
-    Name = "terra-ubuntu-instance-${count.index}" 
-  }
+ # key_name               = aws_key_pair.mykeypair.key_name
+ # tags = {
+ #   Name = "terra-ubuntu-instance-${count.index}"
+
+
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update
+              apt-get install -y apache2
+              sed -i -e 's/80/8080/' /etc/apache2/ports.conf
+              echo "Hello World" > /var/www/html/index.html
+              systemctl restart apache2
+              EOF
+
 }
 
 
-# Create multiple EC2 instances
-resource "aws_instance" "terra_aws" {
-  count = 3 
 
-  ami                    = "ami-09fdfbe62666994aa"
-  instance_type          = "t2.micro" 
-  key_name               = aws_key_pair.mykeypair.key_name
-  tags = {
-    Name = "terra-aws-instance-${count.index}" 
-  }
+output "web-address" {
+  value = "${aws_instance.terra_ubu.public_dns}:8080"
 }
 
