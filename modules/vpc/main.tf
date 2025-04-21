@@ -14,12 +14,6 @@ terraform {
 }
 
 
-
-
-
-
-
-
 # Internet VPC
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
@@ -96,6 +90,7 @@ resource "aws_instance" "terra_ubu"  {
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
+              ssh-keygen -f mykey
               apt-get install -y apache2
               sed -i -e 's/80/8080/' /etc/apache2/ports.conf
               echo "Hello World" > /var/www/html/index.html
