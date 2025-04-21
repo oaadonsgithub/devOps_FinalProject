@@ -105,6 +105,6 @@ resource "aws_instance" "terra_ubu" {
 
 
 output "web-address" {
-  value = "${aws_instance.terra_ubu.public_dns}:8080"
+  value = "${aws_instance.terra-ubuntu-instance-${count.index}.public_dns}:8080"
 }
 
