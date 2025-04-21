@@ -93,8 +93,7 @@ resource "aws_instance" "terra_ubu" {
   instance_type          = "t2.micro" 
  # key_name               = aws_key_pair.mykeypair.key_name
  # tags = {
- #   Name = "terra-ubuntu-instance-${count.index}" 
-  }
+ #   Name = "terra-ubuntu-instance-${count.index}"
 
 
   user_data = <<-EOF
