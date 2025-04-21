@@ -86,15 +86,12 @@ resource "aws_route_table_association" "main-public-1-a" {
 
 
 # Create multiple EC2 instances
-resource "aws_instance" "terra_ubu" {
-
-
+resource "aws_instance" "terra_ubu"  { 
   ami                    = "ami-0a07501f369088e6e"
   instance_type          = "t2.micro" 
  # key_name               = aws_key_pair.mykeypair.key_name
  # tags = {
- #   Name = "terra-ubuntu-instance-${count.index}"
-
+ #  ame = "terra-ubuntu-instance-${count.index}"
 
   user_data = <<-EOF
               #!/bin/bash
@@ -104,7 +101,6 @@ resource "aws_instance" "terra_ubu" {
               echo "Hello World" > /var/www/html/index.html
               systemctl restart apache2
               EOF
-
 }
 
 
