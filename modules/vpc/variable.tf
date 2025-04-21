@@ -22,6 +22,3 @@ variable "PRIVATE_KEY" {
   default = "mykey"
 }
 
-variable "PUBLIC_KEY" {
-  default = "mykey.pub"
-}
