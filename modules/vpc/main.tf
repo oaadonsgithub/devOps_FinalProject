@@ -86,7 +86,7 @@ resource "aws_instance" "terra_ubu" {
   count = 3 
 
   ami                    = "ami-0a07501f369088e6e"
-  instance_type          = "t2.micro" 
+  instance_type          = "t2.medium" 
   tags = {
     Name = "terra-ubuntu-instance-${count.index}" 
   }
