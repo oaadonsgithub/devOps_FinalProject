@@ -14,12 +14,6 @@ terraform {
 }
 
 
-
-
-
-
-
-
 # Internet VPC
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
@@ -89,19 +83,21 @@ resource "aws_route_table_association" "main-public-1-a" {
 resource "aws_instance" "terra_ubu"  { 
   ami                    = "ami-0a07501f369088e6e"
   instance_type          = "t2.micro" 
- # key_name               = aws_key_pair.mykeypair.key_name
- # tags = {
- #  ame = "terra-ubuntu-instance-${count.index}"
 
-  user_data = <<-EOF
+
+
+   user_data = <<-EOF
               #!/bin/bash
               apt-get update
+              ssh-keygen -f mykey
               apt-get install -y apache2
               sed -i -e 's/80/8080/' /etc/apache2/ports.conf
               echo "Hello World" > /var/www/html/index.html
               systemctl restart apache2
               EOF
-}
+
+ }
+
 
 
 
